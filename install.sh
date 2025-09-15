@@ -53,8 +53,15 @@ function configure_vim {
   done
 }
 
+function configure_nvim {
+  echo "Adding configuration files for Neovim"
+  mkdir -p ~/.config/nvim
+  cp -r -v ./nvim ~/.config/nvim
+}
+
 install_fonts
 configure_shell
 configure_terminal_emulators
 configure_tmux
 configure_vim
+configure_nvim
