@@ -15,6 +15,15 @@ function install_fonts {
   done
 }
 
+function configure_shell {
+  echo "Adding configuration files for Shell"
+  for config_file in ./shell/.* ; do
+    filename="${config_file##*/}"
+    basename="${filename%.*}"
+    cp -v $config_file ~/$basename
+  done
+}
+
 function configure_terminal_emulators {
   echo "Adding configuration files for terminal emulators"
   for dir in ./terminal_emulators/* ; do
@@ -45,6 +54,7 @@ function configure_vim {
 }
 
 install_fonts
+configure_shell
 configure_terminal_emulators
 configure_tmux
 configure_vim
