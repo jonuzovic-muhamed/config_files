@@ -8,7 +8,7 @@ function install_fonts {
     mkdir /tmp/$basename
     unzip $file -d /tmp/$basename &> /dev/null
     mkdir -p ~/.local/share/fonts/
-    mv /tmp/$basename/*.ttf ~/.local/share/fonts/
+    cp -v /tmp/$basename/*.ttf ~/.local/share/fonts/
     rm -rf /tmp/$basename
     echo "Finished installing font $file"
     fc-cache -f -v &> /dev/null
@@ -35,6 +35,16 @@ function configure_tmux {
   done
 }
 
+function configure_vim {
+  echo "Adding configuration files for vim"
+  for file in ./vim/.* ; do
+    filename="${file##*/}"
+    basename="${filename%.*}"
+    cp -r -v $file ~/$filename
+  done
+}
+
 install_fonts
 configure_terminal_emulators
 configure_tmux
+configure_vim
