@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Font Installation
-
 function install_fonts {
   for file in fonts/* ; do
     echo "Started installing font $file"
@@ -27,6 +25,16 @@ function configure_terminal_emulators {
   done
 }
 
+function configure_tmux {
+  echo "Adding configuration files for tmux"
+  cp -v ./tmux/.tmux.conf ~/.tmux.conf
+  for file in ./tmux/.tmux/* ; do
+    filename="${file##*/}"
+    basename="${filename%.*}"
+    cp -r -v $file ~/.tmux/$filename
+  done
+}
+
 install_fonts
 configure_terminal_emulators
-
+configure_tmux
