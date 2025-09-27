@@ -30,7 +30,7 @@ function configure_terminal_emulators {
     dir_name="${dir##*/}"
     basename="${dir_name%.*}"
     mkdir -p ~/.config/$basename
-    cp -r -v $dir ~/.config/$basename
+    cp -r -v "$dir/." "$HOME/.config/$basename/"
   done
 }
 
@@ -40,7 +40,8 @@ function configure_tmux {
   for file in ./tmux/.tmux/* ; do
     filename="${file##*/}"
     basename="${filename%.*}"
-    cp -r -v $file ~/.tmux/$filename
+    mkdir -p ~/.tmux
+    cp -r -v "$file" ~/.tmux/
   done
 }
 
@@ -56,7 +57,7 @@ function configure_vim {
 function configure_nvim {
   echo "Adding configuration files for Neovim"
   mkdir -p ~/.config/nvim
-  cp -r -v ./nvim ~/.config/nvim
+  cp -r -v ./nvim/. ~/.config/nvim/
 }
 
 install_fonts
