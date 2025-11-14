@@ -15,6 +15,8 @@ export MANPAGER="nvim +Man!"
 export HISTCONTROL=ignoredups:erasedups
 export LIBVIRT_DEFAULT_URI='qemu:///system'
 
+eval `ssh-agent -s` &> /dev/null
+
 # Vi like navigation mode for shell
 set -o vi
 bind -m vi-command 'Control-l: clear-screen'
@@ -39,17 +41,6 @@ alias mv="mv -v"
 # Enable bash completion in interactive shells
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-fi
-
-# XDG Base Directory Specification
-if [ -z "$XDG_CONFIG_HOME" ] ; then
-    export XDG_CONFIG_HOME="$HOME/.config"
-fi
-if [ -z "$XDG_DATA_HOME" ] ; then
-    export XDG_DATA_HOME="$HOME/.local/share"
-fi
-if [ -z "$XDG_CACHE_HOME" ] ; then
-    export XDG_CACHE_HOME="$HOME/.cache"
 fi
 
 # Archive extraction
