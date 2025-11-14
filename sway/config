@@ -20,6 +20,10 @@ include /etc/sway/config.d/*.conf"
 # Mod key (Mod1 = Alt; Mod4 = Cmd/Windows Key)
 set $mod Mod4
 
+# Outputs
+set $first_output DP-1
+set $second_output DP-2
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -30,8 +34,7 @@ set $right l
 set $term kitty
 
 # Application Launcher
-#set $menu rofi -show drun -modi drun -line-padding 4 -hide-scrollbar -show-icons
-set $menu wmenu-run
+set $menu rofi -show drun -monitor DP-1 -modi run,drun,window,ssh -line-padding 2 -hide-scrollbar -show-icons
 
 # Web Browser
 set $browser google-chrome-stable --ozone-platform=wayland
@@ -41,19 +44,20 @@ set $browser google-chrome-stable --ozone-platform=wayland
 ############################
 
 # Monitor Output Configuration
-output DP-1 resolution 3840x2160@60Hz position 0,0
-output DP-1 scale 1.5
-output DP-2 resolution 3840x2160@60Hz position 2560,0
-output DP-2 scale 1.5
+output $first_output resolution 3840x2160@60Hz position 0,0
+output $first_output scale 1.25
+output $second_output resolution 3840x2160@60Hz position 3072,0
+output $second_output scale 1.25
 
 # Wallpaper
-output * bg /usr/share/backgrounds/SequoiaDark.png fill
+output * bg /usr/share/backgrounds/abstract-colors.jpg fill
 
 # Enable Adaptive Sync
 output * adaptive_sync on
+output * max_render_time 1
 
-# Wether to use GPU to draw mouse cursor
-# set hardware_cursor no
+# Use GPU to draw mouse cursor
+set $hardware_cursor no
 
 # Font
 font JetBrains Mono Regular 14
@@ -69,8 +73,8 @@ client.background        $base
 
 # Borders
 hide_edge_borders smart
-default_border pixel 0
-default_floating_border pixel 0
+default_border none
+default_floating_border none
 
 # Window Gaps
 gaps inner 5
@@ -80,30 +84,25 @@ gaps outer 5
 ### Static Workspace Configuration ###
 ######################################
 
-workspace 1 output DP-1
-workspace 2 output DP-1
-workspace 3 output DP-1
-workspace 4 output DP-1
-workspace 5 output DP-1
-workspace 6 output DP-2
-workspace 7 output DP-2
-workspace 8 output DP-2
-workspace 9 output DP-2
-workspace 10 output DP-2
+workspace 1 output $first_output
+workspace 2 output $first_output
+workspace 3 output $first_output
+workspace 4 output $first_output
+workspace 5 output $first_output
+workspace 6 output $second_output
+workspace 7 output $second_output
+workspace 8 output $second_output
+workspace 9 output $second_output
+workspace 10 output $second_output
 
 ##########################
 ### App Configurations ###
 ##########################
 
-for_window [app_id="dunst"] floating enable
-for_window [app_id="brave-browser"] floating enable
-for_window [app_id="firefox"] floating enable
 for_window [app_id="thunderbird"] floating enable
-for_window [app_id="qalculate-qt"] floating enable
-for_window [app_id="anki"] floating enable
+for_window [app_id="qalculate"] floating enable
+for_window [app_id="qalculate-gtk"] floating enable
 for_window [app_id="keepassxc"] floating enable
-for_window [app_id="eclipse"] floating enable
-for_window [app_id="idea"] floating enable
 
 ##############################
 ### SwayLock Configuration ###
@@ -128,19 +127,18 @@ set $lock 'swaylock \
     --text-wrong-color d3c6aa \
     --indicator-radius 100 \
     --indicator-thickness 10 \
-    --font "JetBrains Mono"'
+    --font "JetBrains Mono" \
+    --image /usr/share/backgrounds/abstract-colors.jpg \
+    --scaling fill \'
 
-##########################
-### Idle Configuration ###
-##########################
+###############################
+### Sway Idle Configuration ###
+###############################
+
 exec swayidle -w \
           timeout 300 'swaylock -f -c 000000' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           before-sleep 'swaylock -f -c 000000'
-
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ###########################
 ### Input Configuration ###
@@ -189,7 +187,7 @@ exec swayidle -w \
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+Backspace exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
