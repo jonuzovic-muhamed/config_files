@@ -1,84 +1,36 @@
 * {
-    font-family: "JetBrainsMono Nerd Font";
-    font-weight: bold;
+    font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", "Font Awesome 6 Free", monospace, "sans-serif";
     font-size: 20px;
 }
 
+#workspaces button{
+    color: #f3f4f6;
+}
+
 #workspaces button.focused {
-    background: #8aadf4;
-    color: #232634;
+    background-color: #bd51d8;
 }
 
 window#waybar {
     background-color: #232634;
-    color: #dce0e8;
+    color: #f3f4f6;
 }
 
-#tray {
-    padding: 0 12px;
-}
-
-#custom-gpu-usage {
-    padding: 0 12px;
-}
-
-#bluetooth {
-    padding: 0 12px;
-}
-
-#battery {
-    padding: 0 12px;
-}
-
-#pulseaudio {
-    padding: 0 12px;
-}
-
-#backlight {
-    padding: 0 12px;
-}
-
-#custom-updates {
-    padding: 0 12px;
-}
-
-#network {
-    padding: 0 12px;
-}
-
-#memory {
-    padding: 0 12px;
-}
-
-#cpu {
-    padding: 0 12px;
-}
-
-#custom-launcher {
-    padding: 0 12px;
-}
-
-#language{
-    padding: 0 12px;
-}
-
-#clock{
-    padding: 0 12px;
-}
-
-#temperature{
+#tray, #custom-gpu-usage, #bluetooth, #battery, #pulseaudio,
+#backlight, #custom-updates, #network, #memory, #cpu,
+#custom-launcher, #language, #clock, #temperature {
     padding: 0 12px;
 }
 
 #custom-power{
+    color: #25db56;
     margin-right: 15px;
-    color: #40a02b;
     padding: 0 12px;
 }
 
 #custom-delimiter {
     padding: 0 8px;
-    color: #8aadf4;
+    color: #bd51d8;
 }
 
 menu {

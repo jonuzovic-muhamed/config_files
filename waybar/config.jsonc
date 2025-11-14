@@ -1,6 +1,6 @@
 {
     "layer": "top",
-      "position": "bottom",
+      "position": "top",
     "modules-left": [
         "sway/workspaces",
     ],
@@ -8,7 +8,7 @@
         "custom/delimiter",
         "pulseaudio",
         "custom/delimiter",
-        "memory",
+        "custom/ram",
         "custom/delimiter",
         "custom/cpu",
         "custom/delimiter",
@@ -59,6 +59,11 @@
     "memory": {
         "format": "RAM {}%"
     },
+    "custom/ram": {
+      "format": "RAM {}",
+      "exec": "~/.config/waybar/scripts/ram.sh",
+      "interval": 10
+    },
     "custom/cpu": {
       "format": "CPU {}",
       "exec": "~/.config/waybar/scripts/cpu.sh",
@@ -87,26 +92,23 @@
       }
     },
     "network": {
-        // "interface": "vmbridge",
         "format-wifi": "{essid} ",
-        "format-ethernet": "",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
+        "format-ethernet": "",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon}  {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth": "{volume}%  {format_source}",
+        "format-bluetooth-muted": "{volume}%  {format_source}",
+        "format-muted": "󰖁 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
@@ -118,7 +120,7 @@
       "format" : "⏻",
       "tooltip": false,
       "menu": "on-click",
-      "menu-file": "$HOME/.config/waybar/menu.xml", // Menu file in resources folder
+      "menu-file": "$HOME/.config/waybar/menu.xml",
       "menu-actions": {
       "shutdown": "shutdown",
       "reboot": "reboot",
