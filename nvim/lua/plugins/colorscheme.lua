@@ -30,6 +30,14 @@ CATPPUCIN_MACCHIATO = {
   lazy = false,
   name = "catppuccin",
   config = function()
+     require("catppuccin").setup({
+      transparent_background = true,
+      integrations = {
+        nvimtree = true,
+        treesitter = true,
+        cmp = true,
+      }
+    })
     vim.cmd.colorscheme("catppuccin-macchiato")
   end
 }
@@ -45,4 +53,4 @@ TOKYONIGHT = {
   end
 }
 
-return CATPPUCIN_MOCHA;
+return CATPPUCIN_MACCHIATO;
