@@ -13,10 +13,13 @@ ping -4 -c1 deb.debian.org &>/dev/null ||
 }
 
 ### General Tools
-total_packages=('radeontop thunar pavucontrol keepassxc obs-studio vlc qalculate-gtk')
+total_packages=('ripgrep libnotify radeontop thunar pavucontrol keepassxc obs-studio vlc qalculate-gtk')
+
+### Containerization
+total_packages=('podman podman-compose')
 
 ### Wayland
-total_packages+=('wayland libqt5waylandclient5 libqt5waylandcompositor5 libqt6waylandclient6 libqt6waylandcompositor6 libva-wayland2 libwayland-client0 libwayland-cursor0 libwayland-egl1 libwayland-server0 qt6-wayland qtwayland5 xwayland-run xwayland xwaylandvideobridge')
+total_packages+=('wayland wlogout libqt5waylandclient5 libqt5waylandcompositor5 libqt6waylandclient6 libqt6waylandcompositor6 libva-wayland2 libwayland-client0 libwayland-cursor0 libwayland-egl1 libwayland-server0 qt6-wayland qtwayland5 xwayland-run xwayland xwaylandvideobridge')
 
 ### XDG Desktop Portal Definition
 total_packages+=('python3-xdg xdg-dbus-proxy xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal xdg-user-dirs-gtk xdg-user-dirs xdg-utils')
@@ -37,7 +40,7 @@ total_packages+=('waybar')
 total_packages+=('kitty alacritty foot')
 
 ### Fonts
-total_packages+='fonts-firacode'
+total_packages+='fonts-firacode ttf-mscorefonts-installer'
 
 ### Office Suite
 total_packages+=('libreoffice')
