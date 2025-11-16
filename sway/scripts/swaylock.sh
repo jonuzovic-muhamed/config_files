@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # Set the directory containing your wallpapers
-WALLPAPER_DIR="$HOME/Pictures/Wallpapers/Favorites"
-
-# Select a random wallpaper from the directory
-WALLPAPER=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+# WALLPAPER_DIR="/usr/share/backgrounds"
+#
+# # Select a random wallpaper from the directory
+# WALLPAPER=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+WALLPAPER='/usr/share/backgrounds/sunset_mountain.jpg'
 
 # Catppuccin Dark Color Palette
 COLOR_BG="#1e1e2f"          # Background color
