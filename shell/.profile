@@ -1,9 +1,9 @@
-#  __  __     _   ____             __ _ _
-# |  \/  |   | | |  _ \ _ __ ___  / _(_) | ___
-# | |\/| |_  | | | |_) | '__/ _ \| |_| | |/ _ \
-# | |  | | |_| | |  __/| | | (_) |  _| | |  __/
-# |_|  |_|\___/  |_|   |_|  \___/|_| |_|_|\___|
-
+#  __  __     _       ____             __ _ _
+# |  \/  |   | |___  |  _ \ _ __ ___  / _(_) | ___
+# | |\/| |_  | / __| | |_) | '__/ _ \| |_| | |/ _ \
+# | |  | | |_| \__ \ |  __/| | | (_) |  _| | |  __/
+# |_|  |_|\___/|___/ |_|   |_|  \___/|_| |_|_|\___|
+#
 
 # General
 export NATIVE_WAYLAND=1
@@ -21,7 +21,7 @@ export XDG_SCREENSHOTS_DIR=$HOME/Pictures/Screenshots
 
 # GTK Setup
 export GDK_BACKEND=wayland
-export GTK_THEME=Adwaita:dark
+export GTK_THEME=Yaru-blue-dark
 export GDK_SCALE=1
 export GDK_DPI_SCALE=1
 
