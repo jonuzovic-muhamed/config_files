@@ -6,8 +6,10 @@
 # | |__| (_) | | | |  _| | (_| |  | || | | \__ \ || (_| | | |
 #  \____\___/|_| |_|_| |_|\__, | |___|_| |_|___/\__\__,_|_|_|
 #                         |___/
-# By: Muhamed Jonuzovic
+
+# Author: Muhamed Jonuzovic
 # Date: 16.11.2025
+# About: Installation Script for Configuration Files
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
 
@@ -50,14 +52,12 @@ install_external_fonts() {
   rm -rf "$tmp_dir"/* | tee -a "$log_file"
 }
 
-install_shell_configuration() {
-  echo '=================== SHELL CONFIG INSTALLATION ===================' | tee -a "$log_file"
-  shell_dir="$SCRIPT_DIR/shell"
-
-  for file in "$shell_dir"/.*; do
-    basename=$(basename "$file")
-    ln -f -v "$file" "$HOME/$basename" | tee -a "$log_file"
-  done
+install_bash_configuration() {
+  echo '=================== BASH CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  bash_dir="$SCRIPT_DIR/bash"
+  ln -s -f -v "$bash_dir/.bashrc" "$HOME/.bashrc"
+  ln -s -f -v "$bash_dir/.bash_profile" "$HOME/.bash_profile"
+  ln -s -f -v -n "$bash_dir/.bash" "$HOME/.bash"
 }
 
 install_terminal_emulator_configuration() {
@@ -104,15 +104,46 @@ install_neovim_configuration() {
   fi
 }
 
-main() {
-    echo '=================== BEGIN CONFIG FILE INSTALLATION ===================' | tee -a "$log_file"
-    # install_external_fonts
-    install_shell_configuration
-    install_terminal_emulator_configuration
-    install_tmux_configuration
-    install_vim_configuration
-    install_neovim_configuration
-    echo '=================== END CONFIG FILE INSTALLATION =====================' | tee -a "$log_file"
+usage() {
+  cat <<EOF
+Usage: ./install.sh [OPTIONS]
+
+Options:
+  --bash        Install Bash config
+  --font        Install Fonts
+  --tmux        Install Tmux config
+  --vim         Install Vim config
+  --nvim        Install Neovim config
+  --sway        Install Sway config
+  --terminal    Install Terminal Emulators config
+  --all         Install everything
+  -h, --help    Show this help
+EOF
 }
 
-main
+INSTALL_ALL=false
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --bash) install_bash_configuration ;;
+    --font) install_external_fonts ;;
+    --tmux) install_tmux_configuration ;;
+    --vim)  install_vim_configuration ;;
+    --nvim) install_neovim_configuration ;;
+    --sway) ;;
+    --terminal) install_terminal_emulator_configuration ;;
+    --all)  INSTALL_ALL=true ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown option: $1"; usage; exit 1 ;;
+  esac
+  shift
+done
+
+if $INSTALL_ALL; then
+  install_external_fonts
+  install_bash_configuration
+  install_terminal_emulator_configuration
+  install_tmux_configuration
+  install_vim_configuration
+  install_neovim_configuration
+fi
