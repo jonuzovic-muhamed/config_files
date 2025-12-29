@@ -1,76 +1,29 @@
-#  __  __     _       ____            _        ____             __ _
-# |  \/  |   | |___  | __ )  __ _ ___| |__    / ___|___  _ __  / _(_) __ _
-# | |\/| |_  | / __| |  _ \ / _` / __| '_ \  | |   / _ \| '_ \| |_| |/ _` |
-# | |  | | |_| \__ \ | |_) | (_| \__ \ | | | | |__| (_) | | | |  _| | (_| |
-# |_|  |_|\___/|___/ |____/ \__,_|___/_| |_|  \____\___/|_| |_|_| |_|\__, |
-#                                                                    |___/
+#  ____            _        ____             __ _
+# | __ )  __ _ ___| |__    / ___|___  _ __  / _(_) __ _
+# |  _ \ / _` / __| '_ \  | |   / _ \| '_ \| |_| |/ _` |
+# | |_) | (_| \__ \ | | | | |__| (_) | | | |  _| | (_| |
+# |____/ \__,_|___/_| |_|  \____\___/|_| |_|_| |_|\__, |
+#                                                 |___/
 
-# Environment Variables Declaration
-export EDITOR=nvim
-export VISUAL=nvim
-export TERM=xterm-256color
-export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-export PATH=$PATH:$JAVA_HOME
-export MANPAGER="nvim +Man!"
-export HISTCONTROL=ignoredups:erasedups
-export LIBVIRT_DEFAULT_URI='qemu:///system'
+# Author: Muhamed Jonuzovic
+# Date: 29.12.2025
+# About: Entrypoint file for loading the configuration step by step. The configuration is located inside $HOME/.bash config directory.
 
-eval `ssh-agent -s` &> /dev/null
+# Only run for interactive shells
+[[ $- != *i* ]] && return
 
-# Vi like navigation mode for shell
-set -o vi
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
+# Prevent double-loading
+[[ -n "$BASHRC_LOADED" ]] && return
+export BASHRC_LOADED=1
 
-# Custom prompt
-PS1='\[\e[34;1m\]\w \[\e[0m\]$ '
+BASH_DIR="$HOME/.bash"
 
-# Each filetype has different color
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43:'
+source "$BASH_DIR/core.sh"
+source "$BASH_DIR/env.sh"
+source "$BASH_DIR/paths.sh"
+source "$BASH_DIR/aliases.sh"
+source "$BASH_DIR/functions.sh"
+source "$BASH_DIR/tools.sh"
 
-# History
-HISTSIZE=5000
-HISTFILESIZE=20000
-
-# Aliases
-alias ll="ls -lahvg --group-directories-first --color=auto"
-alias rm="rm -v -i"
-alias cp="cp -v -i"
-alias mv="mv -v"
-
-# Enable bash completion in interactive shells
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
-# Archive extraction
-# usage: ex <file>
-ex ()
-{
-  if [ -f "$1" ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *.deb)       ar x $1      ;;
-      *.tar.xz)    tar xf $1    ;;
-      *.tar.zst)   unzstd $1    ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
-
-# Node Version Manager
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Optional machine- or user-specific overrides
+[[ -f "$BASH_DIR/local.sh" ]] && source "$BASH_DIR/local.sh"
