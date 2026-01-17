@@ -9,14 +9,12 @@
 # Date: 29.12.2025
 # About: Entrypoint file for loading the configuration step by step. The configuration is located inside $HOME/.bash config directory.
 
-# Only run for interactive shells
-[[ $- != *i* ]] && return
-
-# Prevent double-loading
-[[ -n "$BASHRC_LOADED" ]] && return
-export BASHRC_LOADED=1
-
+# Global Config Location
 BASH_DIR="$HOME/.bash"
+
+# Only run for interactive shells
+# Prevent loading heavy stuff for non-interactive shell
+[[ $- != *i* ]] && return
 
 source "$BASH_DIR/core.sh"
 source "$BASH_DIR/env.sh"
