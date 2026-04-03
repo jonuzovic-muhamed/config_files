@@ -34,5 +34,8 @@ if [[ -s "$NVM_DIR/bash_completion" ]]; then
   source "$NVM_DIR/bash_completion"
 fi
 
-# ------- HomeBrew Package Manager Completion --------
+# -------- JDK Version 21 ------------
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+
+# ------- HomeBrew Package Manager Completion -----------
 eval "$(/opt/homebrew/bin/brew shellenv bash)"
