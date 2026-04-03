@@ -60,6 +60,21 @@ install_bash_configuration() {
   ln -s -f -v -n "$bash_dir/.bash" "$HOME/.bash"
 }
 
+install_zsh_configuration() {
+  echo '=================== ZSH CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  zsh_dir="$SCRIPT_DIR/zsh"
+  ln -s -f -v "$zsh_dir/.zshrc" "$HOME/.zshrc" | tee -a "$log_file"
+  ln -s -f -v "$zsh_dir/.zprofile" "$HOME/.zprofile" | tee -a "$log_file"
+  ln -s -f -v -n "$zsh_dir/.zsh" "$HOME/.zsh" | tee -a "$log_file"
+
+  # local.sh is copied (not linked) to keep sensitive content out of git
+  if [[ ! -f "$HOME/.zsh/local.sh" ]]; then
+    cp -v "$zsh_dir/.zsh/local.sh" "$HOME/.zsh/local.sh" | tee -a "$log_file"
+  else
+    echo "~/.zsh/local.sh already exists, skipping copy to preserve local secrets." | tee -a "$log_file"
+  fi
+}
+
 install_terminal_emulator_configuration() {
   echo '=================== TERMINAL EMULATOR CONFIG INSTALLATION ===================' | tee -a "$log_file"
   terminal_dir="$SCRIPT_DIR/terminal_emulators"
@@ -110,6 +125,7 @@ Usage: ./install.sh [OPTIONS]
 
 Options:
   --bash        Install Bash config
+  --zsh         Install Zsh config
   --font        Install Fonts
   --tmux        Install Tmux config
   --vim         Install Vim config
@@ -126,6 +142,7 @@ INSTALL_ALL=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --bash) install_bash_configuration ;;
+    --zsh)  install_zsh_configuration ;;
     --font) install_external_fonts ;;
     --tmux) install_tmux_configuration ;;
     --vim)  install_vim_configuration ;;
@@ -142,6 +159,7 @@ done
 if $INSTALL_ALL; then
   install_external_fonts
   install_bash_configuration
+  install_zsh_configuration
   install_terminal_emulator_configuration
   install_tmux_configuration
   install_vim_configuration
