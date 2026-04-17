@@ -21,8 +21,14 @@ total_packages=('podman podman-compose')
 ### Wayland
 total_packages+=('wayland wlogout libqt5waylandclient5 libqt5waylandcompositor5 libqt6waylandclient6 libqt6waylandcompositor6 libva-wayland2 libwayland-client0 libwayland-cursor0 libwayland-egl1 libwayland-server0 qt6-wayland qtwayland5 xwayland-run xwayland xwaylandvideobridge')
 
+### Wayland Compositor Utilities
+total_packages+=('wdisplays brightnessctl grimshot')
+
 ### XDG Desktop Portal Definition
 total_packages+=('python3-xdg xdg-dbus-proxy xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal xdg-user-dirs-gtk xdg-user-dirs xdg-utils')
+
+### Keyring
+total_packages+=('gnome-keyring libsecret-1-0')
 
 ### App Launchers
 total_packages+=('rofi')
@@ -37,16 +43,16 @@ total_packages+=('sway-backgrounds sway-notification-center sway swaybg swayidle
 total_packages+=('waybar')
 
 ### Terminal Emulators
-total_packages+=('kitty alacritty foot')
+total_packages+=('kitty')
 
 ### Fonts
-total_packages+='fonts-firacode ttf-mscorefonts-installer'
+total_packages+=('fonts-firacode ttf-mscorefonts-installer')
 
 ### Office Suite
 total_packages+=('libreoffice')
 
-### Browsers & Email
-total_packages+='firefox-esr thunderbird'
+### Browsers 
+total_packages+=('chromium')
 
 ### Network Manager
 total_packages+=('network-manager-applet network-manager-l10n network-manager-openconnect-gnome network-manager-openconnect network-manager-openvpn-gnome network-manager-openvpn network-manager-pptp-gnome network-manager-pptp network-manager-vpnc-gnome network-manager-vpnc network-manager')
