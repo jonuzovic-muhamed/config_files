@@ -9,12 +9,12 @@
 # Date: 29.12.2025
 # About: Various Tooling Configuration
 
-# -------- SSH Agent (start once) --------
+# SSH Agent (start once) 
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
   eval "$(ssh-agent -s)" &>/dev/null
 fi
 
-# -------- Bash completion & Sudo bash completion --------
+# Bash Completion 
 if [[ -f /etc/bash_completion ]]; then
   source /etc/bash_completion
 fi
@@ -23,7 +23,17 @@ if type _sudo >/dev/null 2>&1; then
   complete -F _sudo sudo
 fi
 
-# -------- NVM --------
+# Homebrew Package Manager
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+if [[ -f /home/linuxbrew/.linuxbrew/etc/bash_completion.d ]]; then
+  source /home/linuxbrew/.linuxbrew/etc/bash_completion.d
+fi
+
+# Rust Toolchain 
+[[ -f "$BASH_DIR/local.sh" ]] && source "$BASH_DIR/local.sh"
+. "$HOME/.cargo/env"
+
+# Node Version Manager
 export NVM_DIR="$HOME/.config/nvm"
 
 if [[ -s "$NVM_DIR/nvm.sh" ]]; then
@@ -34,8 +44,5 @@ if [[ -s "$NVM_DIR/bash_completion" ]]; then
   source "$NVM_DIR/bash_completion"
 fi
 
-# -------- JDK Version 21 ------------
-export JAVA_HOME=$(/usr/libexec/java_home -v 21)
-
-# ------- HomeBrew Package Manager Completion -----------
-eval "$(/opt/homebrew/bin/brew shellenv bash)"
+# Java Home Variable 
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
