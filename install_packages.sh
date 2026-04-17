@@ -37,7 +37,7 @@ total_packages+=('rofi')
 total_packages+=('yaru-theme-gtk yaru-theme-icon yaru-theme-sound')
 
 ### Sway Components
-total_packages+=('sway-backgrounds sway-notification-center sway swaybg swayidle swayimg swaykbdd swaylock swayosd')
+total_packages+=('sway-backgrounds sway-notification-center sway swaybg swayidle swayimg swaykbdd gtklock swayosd')
 
 ### System Bar
 total_packages+=('waybar')

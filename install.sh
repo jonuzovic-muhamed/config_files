@@ -119,6 +119,30 @@ install_neovim_configuration() {
   fi
 }
 
+install_sway_configuration() {
+  echo '=================== SWAY CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/sway"
+  target_dir="$HOME/.config/sway"
+  mkdir -p "$target_dir"
+  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+}
+
+install_rofi_configuration() {
+  echo '=================== ROFI CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/rofi"
+  target_dir="$HOME/.config/rofi"
+  mkdir -p "$target_dir"
+  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+}
+
+install_waybar_configuration() {
+  echo '=================== WAYBAR CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/waybar"
+  target_dir="$HOME/.config/waybar"
+  mkdir -p "$target_dir"
+  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+}
+
 usage() {
   cat <<EOF
 Usage: ./install.sh [OPTIONS]
@@ -147,7 +171,9 @@ while [[ $# -gt 0 ]]; do
     --tmux) install_tmux_configuration ;;
     --vim)  install_vim_configuration ;;
     --nvim) install_neovim_configuration ;;
-    --sway) ;;
+    --sway) install_sway_configuration ;;
+    --rofi) install_rofi_configuration ;;
+    --waybar) install_waybar_configuration ;;
     --terminal) install_terminal_emulator_configuration ;;
     --all)  INSTALL_ALL=true ;;
     -h|--help) usage; exit 0 ;;
