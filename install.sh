@@ -155,6 +155,8 @@ Options:
   --vim         Install Vim config
   --nvim        Install Neovim config
   --sway        Install Sway config
+  --rofi        Install Rofi config
+  --waybar      Install Waybar config
   --terminal    Install Terminal Emulators config
   --all         Install everything
   -h, --help    Show this help

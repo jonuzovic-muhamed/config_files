@@ -1,9 +1,25 @@
 * {
-    font-family: "JetBrainsMono Nerd Font", "FiraCode Nerd Font", "Font Awesome 6 Free", monospace, "sans-serif";
-    font-size: 20px;
+    font-family: "Lilex Nerd Font", "JetBrainsMono Nerd Font", "FiraCode Nerd Font", "Font Awesome 6 Free", monospace, "sans-serif";
+    font-size: 12px;
 }
 
-#workspaces button{
+#clock {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#clock, #custom-power, #pulseaudio, #network, #battery, #temperature, #backlight, #cpu, #memory, #tray {
+    padding: 0 10px;
+    margin: 3px 2px;
+    border-radius: 8px;
+    background-color: #303446; 
+}
+
+#network {
+    padding-left: 6px;
+}
+
+#workspaces button {
     color: #f3f4f6;
 }
 
@@ -16,21 +32,30 @@ window#waybar {
     color: #f3f4f6;
 }
 
-#tray, #custom-gpu-usage, #bluetooth, #battery, #pulseaudio,
-#backlight, #custom-updates, #network, #memory, #cpu,
-#custom-launcher, #language, #clock, #temperature {
-    padding: 0 12px;
-}
-
-#custom-power{
+/* States Color Definitions */
+*.normal, *.connected, *.good {
     color: #25db56;
-    margin-right: 15px;
-    padding: 0 12px;
+}
+*.warning {
+    color: #ffe945;
+}
+*.critical, *.disconnected, *.low {
+    color: #f33d40;
 }
 
-#custom-delimiter {
-    padding: 0 8px;
-    color: #bd51d8;
+/* Temperature */
+#temperature {
+    color: #25db56;
+}
+#temperature.critical {
+    color: #f33d40;
+}
+
+/* Custom styles for the power menu */
+#custom-power{
+    color: #d20f39;
+    border: 0.5px solid #d20f39;
+    padding-right: 10px;
 }
 
 menu {

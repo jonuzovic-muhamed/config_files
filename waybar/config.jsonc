@@ -1,27 +1,19 @@
 {
     "layer": "top",
-      "position": "top",
+    "position": "top",
     "modules-left": [
-        "sway/workspaces",
+        "sway/workspaces"
     ],
+    "modules-center": ["clock"],
     "modules-right": [
-        "custom/delimiter",
-        "pulseaudio",
-        "custom/delimiter",
-        "custom/ram",
-        "custom/delimiter",
-        "custom/cpu",
-        "custom/delimiter",
-        "custom/gpu",
-        "custom/delimiter",
         "tray",
-        "custom/delimiter",
+        "pulseaudio",
+        "backlight",
+        "memory",
+        "cpu",
+        "temperature",
         "network",
-        "custom/delimiter",
-        "sway/language",
-        "custom/delimiter",
-        "clock",
-        "custom/delimiter",
+        "battery",
         "custom/power"
     ],
     "keyboard-state": {
@@ -53,32 +45,30 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
+        "format": "CPU {usage}% {avg_frequency:.1f}GHz",
+        "tooltip": true,
+        "interval": 10,
+        "states": {
+            "normal": 0,
+            "warning": 75,
+            "critical": 90
+        }
     },
     "memory": {
-        "format": "RAM {}%"
+        "format": "RAM {used:0.1f} GB",
+        "tooltip-format": "Swap: {swapUsed:0.1f} GB",
+        "interval": 10,
+        "states": {
+            "normal": 0,
+            "warning": 75,
+            "critical": 85
+        }
     },
-    "custom/ram": {
-      "format": "RAM {}",
-      "exec": "~/.config/waybar/scripts/ram.sh",
-      "interval": 10
-    },
-    "custom/cpu": {
-      "format": "CPU {}",
-      "exec": "~/.config/waybar/scripts/cpu.sh",
-      "interval": 10
-    },
-    "custom/gpu": {
-      "format": "{}",
-      "exec": "~/.config/waybar/scripts/gpu.sh",
-      "interval": 10
-    },
-    "custom/keyboard": {
-      "format": "",
-    },
-    "custom/delimiter": {
-      "format": "|"
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "format": "{temperatureC}°C",
+        "format-icons": ["", "", ""],
+        "critical-threshold": 75
     },
     "power-profiles-daemon": {
       "format": "{icon}",
@@ -97,7 +87,11 @@
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "states": {
+            "connected": 0,
+            "disconnected": 0
+        }
     },
     "pulseaudio": {
         "format": "{volume}% {icon}  {format_source}",
@@ -116,52 +110,47 @@
         },
         "on-click": "pavucontrol"
     },
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "states": {
+            "good": 100,
+            "warning": 30,
+            "critical": 15
+        }
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
     "custom/power": {
       "format" : "⏻",
       "tooltip": false,
       "menu": "on-click",
       "menu-file": "$HOME/.config/waybar/menu.xml",
       "menu-actions": {
-      "shutdown": "shutdown",
-      "reboot": "reboot",
-      "suspend": "systemctl suspend",
-      "hibernate": "systemctl hibernate"
-    }
-    //,
-    // "backlight": {
-    //     // "device": "acpi_video1",
-    //     "format": "{percent}% {icon}",
-    //     "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
-    // },
-    // "battery": {
-    //     "states": {
-    //         // "good": 95,
-    //         "warning": 30,
-    //         "critical": 15
-    //     },
-    //     "format": "{capacity}% {icon}",
-    //     "format-full": "{capacity}% {icon}",
-    //     "format-charging": "{capacity}% ",
-    //     "format-plugged": "{capacity}% ",
-    //     "format-alt": "{time} {icon}",
-    //     // "format-good": "", // An empty format will hide the module
-    //     // "format-full": "",
-    //     "format-icons": ["", "", "", "", ""]
-    // },
-    // "battery#bat2": {
-    //     "bat": "BAT2"
-    // },
-    // "custom/media": {
-    //     "format": "{icon} {text}",
-    //     "return-type": "json",
-    //     "max-length": 40,
-    //     "format-icons": {
-    //         "spotify": "",
-    //         "default": "🎜"
-    //     },
-    //     "escape": true,
-    //     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    //     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    // }
+        "shutdown": "[ \"$(echo -e 'Yes\\nNo' | rofi -dmenu -p 'Shutdown?')\" = 'Yes' ] && systemctl poweroff",
+        "reboot": "[ \"$(echo -e 'Yes\\nNo' | rofi -dmenu -p 'Reboot?')\" = 'Yes' ] && systemctl reboot",
+        "suspend": "gtklock -d && systemctl suspend"
+      }
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": [""]
+    },
+    "custom/media": {
+        "format": "{icon} {text}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        //"exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }
