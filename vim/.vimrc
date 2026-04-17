@@ -1,47 +1,41 @@
+"Set compatibility to vim only
+set nocompatible
 
-	"/// Setting & Defining ///
-
-" Set compatibility to vim only
-:set nocompatible
-
-" Set Syntax for Programming
-:syntax on
+"Set Syntax for Programming
+syntax on
 
 "Adding Numbers to Lines:
-:set number
+set number
 
 "Adding Relative Numbers to Lines
-:set relativenumber
+set relativenumber
 
 "Enabling Auto-Indentation:
-:set autoindent
+set autoindent
 
 "Defining Size of Tab to 4:
-:set tabstop=4
+set tabstop=4
 
 "Defining Size of Shift to 4:
-:set shiftwidth=4
+set shiftwidth=4
 
 "Enbling smarttab
-:set smarttab
+set smarttab
 
 "Defining Soft-Tab Size to 4:
-:set softtabstop=4
+set softtabstop=4
 
 "Enabling Selecting Code with Mouse Cursor:
-:set mouse=a
+set mouse=a
 
 " Auto. warp text that extends beyond screen length
-:set wrap
+set wrap
 
 " Encoding
-:set laststatus=2
+set laststatus=2
 
 " Enabling Auto-Indentation:
-:set autoindent
+set autoindent
 
 " For No Previews
-:set completeopt-=preview
-
-	"/// Keybindings ///
-
+set completeopt-=preview
