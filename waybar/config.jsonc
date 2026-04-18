@@ -132,8 +132,8 @@
       "menu": "on-click",
       "menu-file": "$HOME/.config/waybar/menu.xml",
       "menu-actions": {
-        "shutdown": "[ \"$(echo -e 'Yes\\nNo' | rofi -dmenu -p 'Shutdown?')\" = 'Yes' ] && systemctl poweroff",
-        "reboot": "[ \"$(echo -e 'Yes\\nNo' | rofi -dmenu -p 'Reboot?')\" = 'Yes' ] && systemctl reboot",
+        "shutdown": "systemctl poweroff",
+        "reboot": "systemctl reboot",
         "suspend": "gtklock -d && systemctl suspend"
       }
     },
