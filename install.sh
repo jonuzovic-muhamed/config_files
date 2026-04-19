@@ -159,6 +159,14 @@ install_qt_configuration() {
   cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
 }
 
+install_environment_configuration() {
+  echo '=================== ENVIRONMENT.D CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/environment.d"
+  target_dir="$HOME/.config/environment.d"
+  mkdir -p "$target_dir"
+  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+}
+
 install_bash_completion() {
   echo '=================== BASH COMPLETION INSTALLATION ===================' | tee -a "$log_file"
 
@@ -197,6 +205,7 @@ Options:
   --terminal          Install Terminal Emulators config
   --gtk               Install GTK config
   --qt                Install Qt config
+  --env               Install environment.d config
   --all               Install everything
   -h, --help          Show this help
 EOF
@@ -218,7 +227,8 @@ while [[ $# -gt 0 ]]; do
     --waybar) install_waybar_configuration ;;
     --terminal) install_terminal_emulator_configuration ;;
     --gtk) install_gtk_configuration ;;
-    --qt) install_qt_configuration ;; 
+    --qt) install_qt_configuration ;;
+    --env) install_environment_configuration ;;
     --all)  INSTALL_ALL=true ;;
     -h|--help|--usage) usage; exit 0 ;;
     *) echo "Unknown option: $1"; usage; exit 1 ;;
@@ -240,4 +250,5 @@ if $INSTALL_ALL; then
   install_waybar_configuration
   install_gtk_configuration
   install_qt_configuration
+  install_environment_configuration
 fi
