@@ -16,7 +16,15 @@ fi
 
 # Bash Completion 
 if [[ -f /etc/bash_completion ]]; then
-  source /etc/bash_completion
+  . /etc/bash_completion
+fi
+
+if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+  . /usr/share/bash-completion/bash_completion
+fi
+
+if [[ -f "$HOME/.local/share/bash_completion/bash_completion" ]]; then
+  . "$HOME/.local/share/bash-completion/bash_completion"
 fi
 
 if type _sudo >/dev/null 2>&1; then

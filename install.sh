@@ -159,25 +159,46 @@ install_qt_configuration() {
   cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
 }
 
+install_bash_completion() {
+  echo '=================== BASH COMPLETION INSTALLATION ===================' | tee -a "$log_file"
+
+  # Create local bash completion directory if it doesn't exist
+  target_dir="$HOME/.local/share/bash-completion"
+  mkdir -p "$target_dir" | tee -a "$log_file"
+
+  # Download and install bash-completion from GitHub
+  wget -P /tmp https://github.com/scop/bash-completion/releases/download/2.17.0/bash-completion-2.17.0.tar.xz | tee -a "$log_file"
+  tar -xJf /tmp/bash-completion-2.17.0.tar.xz -C /tmp | tee -a "$log_file"
+
+  # Copy the bash_completion script and related files to the local bash completion directory
+  cp -a -v /tmp/bash-completion-2.17.0/bash_completion "$target_dir/" | tee -a "$log_file"
+  cp -a -v /tmp/bash-completion-2.17.0/completions "$target_dir/" | tee -a "$log_file"
+  cp -a -v /tmp/bash-completion-2.17.0/bash_completion.d "$target_dir/" | tee -a "$log_file"
+
+  # Clean up temporary files
+  rm -r -f -v /tmp/bash-completion-2.17.0* | tee -a "$log_file"
+}
+
 usage() {
   cat <<EOF
 Usage: ./install.sh [OPTIONS]
 
 Options:
-  --bash        Install Bash config
-  --zsh         Install Zsh config
-  --font        Install Fonts
-  --tmux        Install Tmux config
-  --vim         Install Vim config
-  --nvim        Install Neovim config
-  --sway        Install Sway config
-  --rofi        Install Rofi config
-  --waybar      Install Waybar config
-  --terminal    Install Terminal Emulators config
-  --gtk         Install GTK config
-  --qt          Install Qt config
-  --all         Install everything
-  -h, --help    Show this help
+  --bash              Install Bash config
+  --bash-completion   Install Bash Completion scripts
+  --zsh               Install Zsh config
+  --font              Install Fonts
+  --tmux              Install Tmux config
+  --vim               Install Vim config
+  --nvim              Install Neovim config
+  --sway              Install Sway config
+  --rofi              Install Rofi config
+  --waybar            Install Waybar config
+  --terminal          Install Terminal Emulators config
+  --gtk               Install GTK config
+  --qt                Install Qt config
+  --all               Install everything
+  -h, --help          Show this help
 EOF
 }
 
@@ -186,6 +207,7 @@ INSTALL_ALL=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --bash) install_bash_configuration ;;
+    --bash-completion) install_bash_completion ;;
     --zsh)  install_zsh_configuration ;;
     --font) install_external_fonts ;;
     --tmux) install_tmux_configuration ;;
@@ -198,7 +220,7 @@ while [[ $# -gt 0 ]]; do
     --gtk) install_gtk_configuration ;;
     --qt) install_qt_configuration ;; 
     --all)  INSTALL_ALL=true ;;
-    -h|--help) usage; exit 0 ;;
+    -h|--help|--usage) usage; exit 0 ;;
     *) echo "Unknown option: $1"; usage; exit 1 ;;
   esac
   shift
@@ -207,6 +229,7 @@ done
 if $INSTALL_ALL; then
   install_external_fonts
   install_bash_configuration
+  install_bash_completion
   install_zsh_configuration
   install_terminal_emulator_configuration
   install_tmux_configuration
