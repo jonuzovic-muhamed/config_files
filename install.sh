@@ -145,18 +145,22 @@ install_waybar_configuration() {
 
 install_gtk_configuration() {
   echo '=================== GTK CONFIG INSTALLATION ===================' | tee -a "$log_file"
-  source_dir="$SCRIPT_DIR/gtk"
-  target_dir="$HOME/.config/gtk-3.0"
-  mkdir -p "$target_dir"
-  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/gtk_config"
+  target_dir_gtk3="$HOME/.config/gtk-3.0"
+  target_dir_gtk4="$HOME/.config/gtk-4.0"
+  mkdir -p "$target_dir_gtk3" "$target_dir_gtk4"
+  cp -a -l -v "$source_dir/." "$target_dir_gtk3/" | tee -a "$log_file"
+  cp -a -l -v "$source_dir/." "$target_dir_gtk4/" | tee -a "$log_file"
 }
 
 install_qt_configuration() {
   echo '=================== QT CONFIG INSTALLATION ===================' | tee -a "$log_file"
-  source_dir="$SCRIPT_DIR/qt"
-  target_dir="$HOME/.config/qt6ct"
-  mkdir -p "$target_dir"
-  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/qt_config"
+  target_dir_qt5="$HOME/.config/qt5ct"
+  target_dir_qt6="$HOME/.config/qt6ct"
+  mkdir -p "$target_dir_qt5" "$target_dir_qt6"
+  cp -a -l -v "$source_dir/." "$target_dir_qt5/" | tee -a "$log_file"
+  cp -a -l -v "$source_dir/." "$target_dir_qt6/" | tee -a "$log_file"
 }
 
 install_environment_configuration() {
