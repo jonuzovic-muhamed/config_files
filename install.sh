@@ -143,6 +143,22 @@ install_waybar_configuration() {
   cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
 }
 
+install_gtk_configuration() {
+  echo '=================== GTK CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/gtk"
+  target_dir="$HOME/.config/gtk-3.0"
+  mkdir -p "$target_dir"
+  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+}
+
+install_qt_configuration() {
+  echo '=================== QT CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/qt"
+  target_dir="$HOME/.config/qt6ct"
+  mkdir -p "$target_dir"
+  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+}
+
 usage() {
   cat <<EOF
 Usage: ./install.sh [OPTIONS]
@@ -158,6 +174,8 @@ Options:
   --rofi        Install Rofi config
   --waybar      Install Waybar config
   --terminal    Install Terminal Emulators config
+  --gtk         Install GTK config
+  --qt          Install Qt config
   --all         Install everything
   -h, --help    Show this help
 EOF
@@ -177,6 +195,8 @@ while [[ $# -gt 0 ]]; do
     --rofi) install_rofi_configuration ;;
     --waybar) install_waybar_configuration ;;
     --terminal) install_terminal_emulator_configuration ;;
+    --gtk) install_gtk_configuration ;;
+    --qt) install_qt_configuration ;; 
     --all)  INSTALL_ALL=true ;;
     -h|--help) usage; exit 0 ;;
     *) echo "Unknown option: $1"; usage; exit 1 ;;
@@ -192,4 +212,9 @@ if $INSTALL_ALL; then
   install_tmux_configuration
   install_vim_configuration
   install_neovim_configuration
+  install_sway_configuration
+  install_rofi_configuration
+  install_waybar_configuration
+  install_gtk_configuration
+  install_qt_configuration
 fi
