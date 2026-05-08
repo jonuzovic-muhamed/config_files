@@ -171,6 +171,14 @@ install_environment_configuration() {
   cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
 }
 
+install_swaync_configuration() {
+  echo '=================== SWAYNC CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  source_dir="$SCRIPT_DIR/swaync"
+  target_dir="$HOME/.config/swaync"
+  mkdir -p "$target_dir"
+  cp -a -l -v "$source_dir/." "$target_dir/" | tee -a "$log_file"
+}
+
 install_bash_completion() {
   echo '=================== BASH COMPLETION INSTALLATION ===================' | tee -a "$log_file"
 
@@ -210,6 +218,7 @@ Options:
   --gtk               Install GTK config
   --qt                Install Qt config
   --env               Install environment.d config
+  --swaync            Install SwayNotificationCenter config
   --all               Install everything
   -h, --help          Show this help
 EOF
@@ -233,6 +242,7 @@ while [[ $# -gt 0 ]]; do
     --gtk) install_gtk_configuration ;;
     --qt) install_qt_configuration ;;
     --env) install_environment_configuration ;;
+    --swaync) install_swaync_configuration ;;
     --all)  INSTALL_ALL=true ;;
     -h|--help|--usage) usage; exit 0 ;;
     *) echo "Unknown option: $1"; usage; exit 1 ;;
@@ -255,4 +265,5 @@ if $INSTALL_ALL; then
   install_gtk_configuration
   install_qt_configuration
   install_environment_configuration
+  install_swaync_configuration
 fi
