@@ -36,8 +36,8 @@
         "tooltip-format": "{app}: {title}"
     },
     "tray": {
-        "icon-size": 25,
-        "spacing": 15
+        "icon-size": 14,
+        "spacing": 8 
     },
     "clock": {
         "timezone": "Europe/Berlin",
