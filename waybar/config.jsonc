@@ -6,6 +6,7 @@
     ],
     "modules-center": ["clock"],
     "modules-right": [
+        "custom/pomodoro",
         "tray",
         "pulseaudio",
         "backlight",
@@ -125,6 +126,14 @@
     },
     "battery#bat2": {
         "bat": "BAT2"
+    },
+    "custom/pomodoro": {
+        "exec": "$HOME/.config/waybar/scripts/pomodoro.sh",
+        "interval": 1,
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/pomodoro.sh toggle",
+        "on-click-right": "$HOME/.config/waybar/scripts/pomodoro.sh skip",
+        "on-click-middle": "$HOME/.config/waybar/scripts/pomodoro.sh reset"
     },
     "custom/power": {
       "format" : "⏻",

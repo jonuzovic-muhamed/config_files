@@ -8,7 +8,7 @@
     font-weight: bold;
 }
 
-#clock, #custom-power, #pulseaudio, #network, #battery, #temperature, #backlight, #cpu, #memory, #tray {
+#clock, #custom-power, #custom-pomodoro, #pulseaudio, #network, #battery, #temperature, #backlight, #cpu, #memory, #tray {
     padding: 0 8px;
 }
 
@@ -42,6 +42,23 @@ window#waybar {
 }
 #temperature.critical {
     color: #f33d40;
+}
+
+/* Pomodoro timer */
+#custom-pomodoro {
+    font-size: 10px;
+    color: #6c7086;
+    font-weight: bold;
+}
+#custom-pomodoro.work {
+    color: #f3f4f6;
+}
+#custom-pomodoro.short_break,
+#custom-pomodoro.long_break {
+    color: #25db56;
+}
+#custom-pomodoro.paused {
+    color: #ffe945;
 }
 
 /* Custom styles for the power menu */
