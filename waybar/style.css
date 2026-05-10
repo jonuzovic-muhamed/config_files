@@ -61,9 +61,9 @@ window#waybar {
     color: #ffe945;
 }
 
-/* Custom styles for the power menu */
-#custom-power{
-    padding-right: 15px;
+/* Custom styles for the main menu */
+#custom-main_menu {
+    padding: 0 15px;
 }
 
 menu {

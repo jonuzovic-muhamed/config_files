@@ -15,7 +15,7 @@
         "temperature",
         "network",
         "battery",
-        "custom/power"
+        "custom/main_menu"
     ],
     "keyboard-state": {
         "numlock": true,
@@ -135,11 +135,11 @@
         "on-click-right": "$HOME/.config/waybar/scripts/pomodoro.sh skip",
         "on-click-middle": "$HOME/.config/waybar/scripts/pomodoro.sh reset"
     },
-    "custom/power": {
+    "custom/main_menu": {
       "format" : "⏻",
       "tooltip": false,
       "menu": "on-click",
-      "menu-file": "$HOME/.config/waybar/menu.xml",
+      "menu-file": "$HOME/.config/waybar/menus/main_menu.xml",
       "menu-actions": {
 		"logout": "paplay $HOME/.config/swaync/sounds/lock.oga && swaymsg exit",
         "shutdown": "paplay $HOME/.config/swaync/sounds/system_shutdown.oga && systemctl poweroff",
