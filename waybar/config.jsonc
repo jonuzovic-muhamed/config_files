@@ -141,10 +141,10 @@
       "menu": "on-click",
       "menu-file": "$HOME/.config/waybar/menu.xml",
       "menu-actions": {
-		"logout": "swaymsg exit",
-        "shutdown": "systemctl poweroff",
-        "reboot": "systemctl reboot",
-        "suspend": "gtklock -d && systemctl suspend"
+		"logout": "paplay $HOME/.config/swaync/sounds/lock.oga && swaymsg exit",
+        "shutdown": "paplay $HOME/.config/swaync/sounds/system_shutdown.oga && systemctl poweroff",
+        "reboot": "paplay $HOME/.config/swaync/sounds/system_shutdown.oga && systemctl reboot",
+        "suspend": "paplay $HOME/.config/swaync/sounds/lock.oga && gtklock -d && systemctl suspend"
       }
     },
     "backlight": {
