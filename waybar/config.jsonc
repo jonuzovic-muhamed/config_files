@@ -141,6 +141,7 @@
       "menu": "on-click",
       "menu-file": "$HOME/.config/waybar/menu.xml",
       "menu-actions": {
+		"logout": "swaymsg exit",
         "shutdown": "systemctl poweroff",
         "reboot": "systemctl reboot",
         "suspend": "gtklock -d && systemctl suspend"
