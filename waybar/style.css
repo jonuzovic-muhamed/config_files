@@ -8,7 +8,7 @@
     font-weight: bold;
 }
 
-#clock, #custom-power, #custom-pomodoro, #pulseaudio, #network, #battery, #temperature, #backlight, #cpu, #memory, #tray {
+#clock, #power-profiles-daemon, #custom-pomodoro, #pulseaudio, #network, #battery, #temperature, #backlight, #cpu, #memory, #tray {
     padding: 0 8px;
 }
 
