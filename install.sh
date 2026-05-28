@@ -105,6 +105,12 @@ install_vim_configuration() {
   ln -f -v "$vim_dir/.vimrc" "$HOME/.vimrc" | tee -a "$log_file"
 }
 
+install_ideavim_configuration() {
+  echo '=================== IDEA VIM FOR INTELLIJ CONFIG INSTALLATION ===================' | tee -a "$log_file"
+  vim_dir="$SCRIPT_DIR/vim"
+  ln -f -v "$vim_dir/.ideavimrc" "$HOME/.ideavimrc" | tee -a "$log_file"
+}
+
 install_neovim_configuration() {
   echo '=================== NEOVIM CONFIG INSTALLATION ===================' | tee -a "$log_file"
   source_dir="$SCRIPT_DIR/nvim"
@@ -210,6 +216,7 @@ Options:
   --font              Install Fonts
   --tmux              Install Tmux config
   --vim               Install Vim config
+  --ideavim)          Install Idea Vim config for Intellij
   --nvim              Install Neovim config
   --sway              Install Sway config
   --rofi              Install Rofi config
@@ -234,6 +241,7 @@ while [[ $# -gt 0 ]]; do
     --font) install_external_fonts ;;
     --tmux) install_tmux_configuration ;;
     --vim)  install_vim_configuration ;;
+    --ideavim)  install_ideavim_configuration ;;
     --nvim) install_neovim_configuration ;;
     --sway) install_sway_configuration ;;
     --rofi) install_rofi_configuration ;;
@@ -258,6 +266,7 @@ if $INSTALL_ALL; then
   install_terminal_emulator_configuration
   install_tmux_configuration
   install_vim_configuration
+  install_ideavim_configuration
   install_neovim_configuration
   install_sway_configuration
   install_rofi_configuration
