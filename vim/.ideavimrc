@@ -1,0 +1,72 @@
+"  MJ's IdeaVim CONFIGURATION
+"  Needed Plugins in Intellij Idea:
+"  IdeaVim, IdeaVim-Quickscope, IdeaVim-EasyMotion, Which-Key, AceJump
+
+set easymotion
+set surround
+set commentary
+set argtextobj
+set textobj-entire
+set ReplaceWithRegister
+set which-key " Enable Which-Key style hints for key mappings
+
+" Smarter search
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+" Use system clipboard
+set clipboard=unnamedplus
+
+" Use relative line numbers
+set number
+set relativenumber
+
+" Enable mouse support
+set mouse=a
+
+" GENERAL KEY MAPPINGS
+
+" Leader Key
+let mapleader = " "
+
+" Run & Debug
+nnoremap <leader>rr :action Run<CR>
+nnoremap <leader>rd :action Debug<CR>
+nnoremap <leader>tb :action ToggleBreakpoint<CR>
+
+" Refactoring
+nnoremap <leader>rn :action RenameElement<CR>
+nnoremap <leader>rf :action ReformatCode<CR>
+nnoremap <leader>ro :action OptimizeImports<CR>
+
+" Code Navigation
+nnoremap <leader>nd :action GotoDeclaration<CR>
+nnoremap <leader>ni :action GotoImplementation<CR>
+nnoremap <leader>nu :action FindUsage<CR>
+nnoremap <leader>ns :action GoToSuperMethod<CR>
+nnoremap <leader>e :action ShowErrorDescription<CR>
+
+" File Navigation
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fr :action RecentFiles<CR>
+nnoremap <leader>fc :action GotoClass<CR>
+nnoremap <leader>fs :action SaveAll<CR>
+nnoremap <leader>fm :action GotoSymbol<CR>
+
+" Git Actions
+nnoremap <leader>ga :action Git.Add<CR>
+nnoremap <leader>gr :action Git.Revert<CR>
+nnoremap <leader>gb :action Git.Branches<CR>
+nnoremap <leader>gc :action CheckinProject<CR>
+nnoremap <leader>gp :action Git.UpdateProject<CR>
+
+" Window Management
+
+" Window Splits
+nnoremap <leader>wv :action SplitVertically<CR>
+nnoremap <leader>wh :action SplitHorizontally<CR>
+
+" Clear
+nnoremap <C-l> :nohlsearch<CR>
