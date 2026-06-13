@@ -155,8 +155,8 @@ install_gtk_configuration() {
   target_dir_gtk3="$HOME/.config/gtk-3.0"
   target_dir_gtk4="$HOME/.config/gtk-4.0"
   mkdir -p "$target_dir_gtk3" "$target_dir_gtk4"
-  cp -a -l -v "$source_dir/." "$target_dir_gtk3/" | tee -a "$log_file"
-  cp -a -l -v "$source_dir/." "$target_dir_gtk4/" | tee -a "$log_file"
+  cp -a -l -v "$source_dir/gtk-3.0/." "$target_dir_gtk3/" | tee -a "$log_file"
+  cp -a -l -v "$source_dir/gtk-4.0/." "$target_dir_gtk4/" | tee -a "$log_file"
 }
 
 install_qt_configuration() {
