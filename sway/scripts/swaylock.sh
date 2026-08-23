@@ -1,11 +1,8 @@
 #!/bin/bash
 
-# Set the directory containing your wallpapers
-# WALLPAPER_DIR="/usr/share/backgrounds"
-#
-# # Select a random wallpaper from the directory
-# WALLPAPER=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
-WALLPAPER='/usr/share/backgrounds/sunset_mountain.jpg'
+# Pick a random wallpaper from the wallpaper folder (same one used for the
+# desktop background). Falls back to a solid background if none is available.
+WALLPAPER="$(~/.config/sway/scripts/set-wallpaper.sh --print || true)"
 
 # Catppuccin Dark Color Palette
 COLOR_BG="#1e1e2f"          # Background color
@@ -21,10 +18,16 @@ SCALING="fill"
 FONT="JetBrains Mono"
 
 
+# Use the wallpaper image if one was found; otherwise fall back to the solid color
+IMAGE_ARGS=()
+if [[ -n "$WALLPAPER" && -f "$WALLPAPER" ]]; then
+    IMAGE_ARGS=(--image "$WALLPAPER" --scaling "$SCALING")
+fi
+
 # Run swaylock with the desired options
-swaylock --ignore-empty-password --show-failed-attempts \
+swaylock --daemonize --ignore-empty-password --show-failed-attempts \
     --color "$COLOR_BG" --inside-color "$COLOR_IN" --ring-color "$COLOR_RING" \
     --inside-clear-color "$COLOR_CLEAR_IN" --ring-clear-color "$COLOR_CLEAR_RING" \
     --inside-ver-color "$COLOR_VER_IN" --ring-ver-color "$COLOR_VER_RING" \
     --inside-wrong-color "$COLOR_WRONG_IN" --ring-wrong-color "$COLOR_WRONG_RING" \
-    --image "$WALLPAPER" --scaling "$SCALING" --font "$FONT"
+    "${IMAGE_ARGS[@]}" --font "$FONT"
