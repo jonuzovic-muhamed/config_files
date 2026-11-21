@@ -27,8 +27,8 @@ total_packages+=('wdisplays brightnessctl grimshot')
 ### XDG Desktop Portal Definition
 total_packages+=('python3-xdg xdg-dbus-proxy xdg-desktop-portal-gtk xdg-desktop-portal-wlr xdg-desktop-portal xdg-user-dirs-gtk xdg-user-dirs xdg-utils')
 
-### Keyring
-total_packages+=('gnome-keyring libsecret-1-0')
+### Secret Service (KeePassXC provides the service)
+total_packages+=('libsecret-1-0 libsecret-tools')
 
 ### App Launchers
 total_packages+=('rofi')

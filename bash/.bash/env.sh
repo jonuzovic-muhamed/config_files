@@ -14,6 +14,9 @@ export TERM=xterm-256color
 export MANPAGER="nvim +Man!"
 export LIBVIRT_DEFAULT_URI='qemu:///system'
 
+# systemd user ssh-agent (environment.d is not read by sway or its children)
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$UID}/openssh_agent"
+
 # Colors for ls
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43:'
 

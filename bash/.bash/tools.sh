@@ -9,11 +9,6 @@
 # Date: 29.12.2025
 # About: Various Tooling Configuration
 
-# SSH Agent (start once) 
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-  eval "$(ssh-agent -s)" &>/dev/null
-fi
-
 # Bash Completion 
 if [[ -f /etc/bash_completion ]]; then
   . /etc/bash_completion

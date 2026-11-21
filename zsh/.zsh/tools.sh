@@ -9,11 +9,6 @@
 # Date: 03.04.2026
 # About: Various Tooling Configuration
 
-# -------- SSH Agent (start once) --------
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-  eval "$(ssh-agent -s)" &>/dev/null
-fi
-
 # -------- Zsh Completion --------
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
